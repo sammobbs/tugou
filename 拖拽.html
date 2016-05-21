@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>拖拽</title>
+	<style type="text/css">
+		#block {
+			width: 100px;
+			height: 100px;
+			background-color: blue;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+
+	</style>
+</head>
+<body>
+<div>
+	触屏事件按中，事件对象（e）包含
+	了，类型均为TouchList[数组]
+
+	touches,手指按下屏幕的点的信息
+	targetTouches;
+	changeedTouches
+</div>
+	<div id="block"></div>
+	<script type="text/javascript">
+		var block = document.getElementById("block");
+		block.addEventListener("touchstart",function(e){
+			console.log("e");
+			var e = e || window.event;
+			var touches = e.touches[0];
+			var oLeft = touches.clientX - block.offsetLeft;
+			var oTop = touches.clientY- block.offsetTop;
+			block.addEventListener("touchmove",function(e){
+				var touches = e.touches[0];
+				var bLeft = touches.clientX - oLeft;
+				var bTop = touches.clientY - oTop;
+				block.style.left = bLeft + "px";
+				block.style.top = bTop + "px";
+			},false)
+		},false)
+	</script>
+</body>
+</html>
